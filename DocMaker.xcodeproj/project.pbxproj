@@ -38,6 +38,8 @@
 		FD44A5D02EAAC85100096F04 /* PDFcoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */; };
 		FD44A5D12EAAC85100096F04 /* PDFComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */; };
 		FD44A5D22EAAC85100096F04 /* DocumentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */; };
+		FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D32EAADE3C00096F04 /* AskAIView.swift */; };
+		FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,8 @@
 		FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStorage.swift; sourceTree = "<group>"; };
 		FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFcoClient.swift; sourceTree = "<group>"; };
 		FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFComposer.swift; sourceTree = "<group>"; };
+		FD44A5D32EAADE3C00096F04 /* AskAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAIView.swift; sourceTree = "<group>"; };
+		FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
 		FDFC1752A829C548E6D636DC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +84,8 @@
 		0BA36A21FE70AAB8975CA975 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FD44A5D32EAADE3C00096F04 /* AskAIView.swift */,
+				FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */,
 				FDFC1752A829C548E6D636DC /* HomeView.swift */,
 			);
 			path = Home;
@@ -265,6 +271,8 @@
 				FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */,
 				FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */,
 				FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */,
+				FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */,
+				FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */,
 				953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,
 				B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,
