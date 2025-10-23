@@ -18,8 +18,22 @@ struct LoginView: View {
                     SecureField("Enter password...", text: $appState.logInData.password)
                 }
 
-                DMButton(title: "Log In") {
-                    appState.navigateToHome()
+                if let error = appState.authError {
+                    Text(error)
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                DMButton(
+                    title: "Log In",
+                    isEnabled: appState.canAttemptLogIn && !appState.isAuthenticating,
+                    isLoading: appState.isAuthenticating
+                ) {
+                    Task {
+                        await appState.logIn()
+                    }
                 }
 
                 HStack {
@@ -31,6 +45,7 @@ struct LoginView: View {
                     Spacer()
 
                     Button("Signup", action: {
+                        appState.clearAuthError()
                         appState.push(.signUp)
                     })
                     .buttonStyle(.plain)
@@ -38,6 +53,12 @@ struct LoginView: View {
                     .font(.subheadline)
                 }
             }
+        }
+        .onChange(of: appState.logInData) { _ in
+            appState.clearAuthError()
+        }
+        .onAppear {
+            appState.clearAuthError()
         }
     }
 }

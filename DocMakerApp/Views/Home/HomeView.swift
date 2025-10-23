@@ -68,5 +68,25 @@ struct HomeView: View {
             .padding(24)
         }
         .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                if let user = appState.authenticatedUser {
+                    Text("Hello, \(user.fullName.components(separatedBy: " ").first ?? user.fullName)!")
+                        .font(.subheadline)
+                        .foregroundColor(.dmTextSecondary)
+                }
+            }
+
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    appState.signOut()
+                } label: {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .imageScale(.medium)
+                        .foregroundColor(.dmPrimary)
+                }
+                .accessibilityLabel("Sign Out")
+            }
+        }
     }
 }
