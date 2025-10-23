@@ -1,5 +1,7 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
+@available(iOS 16.0, *)
 struct ChildrenInfoView: View {
     @EnvironmentObject private var appState: AppState
 

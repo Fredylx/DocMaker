@@ -1,6 +1,7 @@
 import SwiftUI
 import UIKit
 
+@available(iOS 15.0, *)
 struct DMFormScreen<Content: View>: View {
     let title: String
     @ViewBuilder var content: Content

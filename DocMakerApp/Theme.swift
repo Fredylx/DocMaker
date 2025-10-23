@@ -33,7 +33,7 @@ extension View {
     }
 
     func dmShadow(_ shadow: DMShadow.Shadow = DMShadow.card) -> some View {
-        shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
+        self.shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
     }
 }
 

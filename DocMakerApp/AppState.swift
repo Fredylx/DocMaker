@@ -10,6 +10,7 @@ enum AppRoute: Hashable {
     case trustee(index: Int)
 }
 
+@available(iOS 16.0, *)
 final class AppState: ObservableObject {
     @Published var path = NavigationPath()
 
@@ -35,7 +36,7 @@ final class AppState: ObservableObject {
 
     func navigateToHome() {
         path = NavigationPath()
-        path.append(.home)
+        path.append(AppRoute.home)
     }
 
     func startTrusteeFlow() {
@@ -47,11 +48,11 @@ final class AppState: ObservableObject {
 
     func trustee(at index: Int) -> Binding<TrusteeInfo> {
         Binding<TrusteeInfo> {
-            guard trustees.indices.contains(index) else { return TrusteeInfo(order: index + 1) }
-            return trustees[index]
-        } set: { newValue in
-            if trustees.indices.contains(index) {
-                trustees[index] = newValue
+            guard self.trustees.indices.contains(index) else { return TrusteeInfo(order: index + 1) }
+            return self.trustees[index]
+        } set: { [self] newValue in
+            if self.trustees.indices.contains(index) {
+                self.trustees[index] = newValue
             }
         }
     }

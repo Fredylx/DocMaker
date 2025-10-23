@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
 @main
 struct DocMakerApp: App {
     var body: some Scene {
@@ -9,6 +10,7 @@ struct DocMakerApp: App {
     }
 }
 
+@available(iOS 16.0, *)
 private struct RootView: View {
     @StateObject private var appState = AppState()
 
