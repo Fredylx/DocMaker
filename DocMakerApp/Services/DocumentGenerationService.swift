@@ -6,6 +6,7 @@ enum PDFGenerationMethod {
     case pdfco
 }
 
+@available(iOS 16.0, *)
 @MainActor
 final class DocumentGenerationService {
     static let shared = DocumentGenerationService()

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,19 @@
 		C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085C175B1430CFF3F15C5E /* SignUpView.swift */; };
 		CEDD5F2FADDE89C5F374CFF4 /* DocMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */; };
 		F9D3CC408BE73624CEEE48C8 /* DMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495A5A5B044FEF0187774FD /* DMButton.swift */; };
+		FD44A5C12EAAC82700096F04 /* GeneratePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */; };
+		FD44A5C22EAAC82700096F04 /* ReviewInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BF2EAAC82600096F04 /* ReviewInfoView.swift */; };
+		FD44A5C32EAAC82700096F04 /* ConsentAndGenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */; };
+		FD44A5C42EAAC82700096F04 /* ReferFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BE2EAAC82600096F04 /* ReferFriendView.swift */; };
+		FD44A5C52EAAC82700096F04 /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */; };
+		FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */; };
+		FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B82EAAC82600096F04 /* ContactUsView.swift */; };
+		FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */; };
+		FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BB2EAAC82600096F04 /* FAQView.swift */; };
+		FD44A5CF2EAAC85100096F04 /* DocumentGenerationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */; };
+		FD44A5D02EAAC85100096F04 /* PDFcoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */; };
+		FD44A5D12EAAC85100096F04 /* PDFComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */; };
+		FD44A5D22EAAC85100096F04 /* DocumentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +60,19 @@
 		CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocMakerApp.swift; sourceTree = "<group>"; };
 		E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DocMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085C175B1430CFF3F15C5E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentAndGenerateView.swift; sourceTree = "<group>"; };
+		FD44A5B82EAAC82600096F04 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
+		FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailView.swift; sourceTree = "<group>"; };
+		FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
+		FD44A5BB2EAAC82600096F04 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePDFView.swift; sourceTree = "<group>"; };
+		FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
+		FD44A5BE2EAAC82600096F04 /* ReferFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferFriendView.swift; sourceTree = "<group>"; };
+		FD44A5BF2EAAC82600096F04 /* ReviewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfoView.swift; sourceTree = "<group>"; };
+		FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentGenerationService.swift; sourceTree = "<group>"; };
+		FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStorage.swift; sourceTree = "<group>"; };
+		FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFcoClient.swift; sourceTree = "<group>"; };
+		FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFComposer.swift; sourceTree = "<group>"; };
 		FDFC1752A829C548E6D636DC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +88,7 @@
 		41B36AB35DED5A5C7BB20AF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD44A5C02EAAC82600096F04 /* Documents */,
 				861FBA185A222A97F9B547E6 /* Auth */,
 				7275847D2ABBBB58DD7159D6 /* Forms */,
 				0BA36A21FE70AAB8975CA975 /* Home */,
@@ -127,10 +154,38 @@
 				CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */,
 				204219CF4245E15ACCA03E60 /* Info.plist */,
 				14737CA2425F7FB55EF6AF94 /* Theme.swift */,
+				FD44A5CE2EAAC85100096F04 /* Services */,
 				C3DCEC0687A2757FEF427AE9 /* Components */,
 				41B36AB35DED5A5C7BB20AF6 /* Views */,
 			);
 			path = DocMakerApp;
+			sourceTree = "<group>";
+		};
+		FD44A5C02EAAC82600096F04 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */,
+				FD44A5B82EAAC82600096F04 /* ContactUsView.swift */,
+				FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */,
+				FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */,
+				FD44A5BB2EAAC82600096F04 /* FAQView.swift */,
+				FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */,
+				FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */,
+				FD44A5BE2EAAC82600096F04 /* ReferFriendView.swift */,
+				FD44A5BF2EAAC82600096F04 /* ReviewInfoView.swift */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		FD44A5CE2EAAC85100096F04 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
+				FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
+				FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
+				FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,7 +227,6 @@
 			);
 			mainGroup = D4CC2C096B08335CC2EA8F31;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -197,7 +251,20 @@
 				1CA611AD0ECC299BD12C4986 /* DMHeaderBanner.swift in Sources */,
 				CEDD5F2FADDE89C5F374CFF4 /* DocMakerApp.swift in Sources */,
 				38BE51DF4DB10C0FD3438207 /* HomeView.swift in Sources */,
+				FD44A5CF2EAAC85100096F04 /* DocumentGenerationService.swift in Sources */,
+				FD44A5D02EAAC85100096F04 /* PDFcoClient.swift in Sources */,
+				FD44A5D12EAAC85100096F04 /* PDFComposer.swift in Sources */,
+				FD44A5D22EAAC85100096F04 /* DocumentStorage.swift in Sources */,
 				7B075939F6953B79D5FEAC75 /* LoginView.swift in Sources */,
+				FD44A5C12EAAC82700096F04 /* GeneratePDFView.swift in Sources */,
+				FD44A5C22EAAC82700096F04 /* ReviewInfoView.swift in Sources */,
+				FD44A5C32EAAC82700096F04 /* ConsentAndGenerateView.swift in Sources */,
+				FD44A5C42EAAC82700096F04 /* ReferFriendView.swift in Sources */,
+				FD44A5C52EAAC82700096F04 /* DocumentListView.swift in Sources */,
+				FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */,
+				FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */,
+				FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */,
+				FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */,
 				953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,
 				B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,

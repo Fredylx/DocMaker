@@ -21,6 +21,7 @@ enum AppRoute: Hashable {
 }
 
 @available(iOS 16.0, *)
+@MainActor
 final class AppState: ObservableObject {
     @Published var path = NavigationPath()
 
@@ -119,7 +120,7 @@ final class AppState: ObservableObject {
         push(.documentDetail(id: document.id))
     }
 
-    func dataForDocument(id: UUID) -> Data? {
+    @MainActor func dataForDocument(id: UUID) -> Data? {
         documentStorage.data(for: id)
     }
 

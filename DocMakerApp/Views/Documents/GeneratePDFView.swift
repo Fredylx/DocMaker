@@ -65,7 +65,7 @@ struct GeneratePDFView: View {
         phase = .generating
 
         Task {
-            let success = await appState.generateDocument(using: .onDevice)
+            let success = await appState.generateDocument(using: PDFGenerationMethod.onDevice)
             await MainActor.run {
                 if success {
                     phase = .success

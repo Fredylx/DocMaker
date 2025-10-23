@@ -56,7 +56,7 @@ struct ReviewInfoView: View {
             trustee.phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : trustee.phone
         ]
         .compactMap { $0 }
-        .joined(separator: " \u2022 ")
+    .joined(separator: " \u{2022} ")
         .ifEmpty("Incomplete trustee information")
     }
 }
