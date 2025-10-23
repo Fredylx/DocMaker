@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 enum AppRoute: Hashable {
     case signUp
@@ -8,9 +9,19 @@ enum AppRoute: Hashable {
     case spouse
     case children
     case trustee(index: Int)
+    case reviewInfo
+    case legalConsent
+    case generateDocs
+    case documentsList
+    case documentDetail(id: UUID)
+    case payment
+    case referFriend
+    case contact
+    case faq
 }
 
 @available(iOS 16.0, *)
+@MainActor
 final class AppState: ObservableObject {
     @Published var path = NavigationPath()
 
@@ -20,6 +31,23 @@ final class AppState: ObservableObject {
     @Published var spouse = SpouseInfo()
     @Published var children: [ChildInfo] = [ChildInfo(), ChildInfo(), ChildInfo()]
     @Published private(set) var trustees: [TrusteeInfo] = [TrusteeInfo(order: 1)]
+    @Published private(set) var generatedDocuments: [DocumentMetadata] = []
+    @Published var selectedDocumentID: UUID?
+
+    private var cancellables = Set<AnyCancellable>()
+    private let documentStorage: DocumentStorage
+
+    init(documentStorage: DocumentStorage = .shared) {
+        self.documentStorage = documentStorage
+        self.generatedDocuments = documentStorage.documents
+
+        documentStorage.$documents
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] documents in
+                self?.generatedDocuments = documents
+            }
+            .store(in: &cancellables)
+    }
 
     func push(_ route: AppRoute) {
         path.append(route)
@@ -83,7 +111,30 @@ final class AppState: ObservableObject {
         spouse = SpouseInfo()
         children = [ChildInfo(), ChildInfo(), ChildInfo()]
         trustees = [TrusteeInfo(order: 1)]
+        selectedDocumentID = nil
         popToRoot()
+    }
+
+    func openDocument(_ document: DocumentMetadata) {
+        selectedDocumentID = document.id
+        push(.documentDetail(id: document.id))
+    }
+
+    @MainActor func dataForDocument(id: UUID) -> Data? {
+        documentStorage.data(for: id)
+    }
+
+    @discardableResult
+    func generateDocument(using method: PDFGenerationMethod = .onDevice) async -> Bool {
+        do {
+            _ = try await DocumentGenerationService.shared.generateDocument(from: self, method: method)
+            return true
+        } catch {
+#if DEBUG
+            print("Failed to generate document: \(error.localizedDescription)")
+#endif
+            return false
+        }
     }
 }
 

@@ -21,19 +21,19 @@ struct HomeView: View {
                         }
 
                         DMActionCard(title: "+ Review Info") {
-                            appState.push(.children)
+                            appState.push(.reviewInfo)
                         }
 
                         DMActionCard(title: "+ Lock Info & Generate Docs") {
-                            appState.startTrusteeFlow()
+                            appState.push(.legalConsent)
                         }
 
                         DMActionCard(title: "+ View Documents") {
-                            // Placeholder
+                            appState.push(.documentsList)
                         }
 
                         DMActionCard(title: "+ FAQ") {
-                            // Placeholder
+                            appState.push(.faq)
                         }
 
                         DMActionCard(title: "+ Explain how it works") {
@@ -41,15 +41,15 @@ struct HomeView: View {
                         }
 
                         DMActionCard(title: "+ Buy") {
-                            // Placeholder
+                            appState.push(.payment)
                         }
 
                         DMActionCard(title: "+ Refer and Earn") {
-                            // Placeholder
+                            appState.push(.referFriend)
                         }
 
                         DMActionCard(title: "+ Contact Us") {
-                            // Placeholder
+                            appState.push(.contact)
                         }
                     }
                 }
