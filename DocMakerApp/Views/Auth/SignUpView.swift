@@ -24,14 +24,35 @@ struct SignUpView: View {
                         .textInputAutocapitalization(.words)
                 }
 
-                DMButton(title: "Sign Up") {
-                    appState.navigateToHome()
+                if let error = appState.authError {
+                    Text(error)
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                DMButton(
+                    title: "Sign Up",
+                    isEnabled: appState.canAttemptSignUp && !appState.isAuthenticating,
+                    isLoading: appState.isAuthenticating
+                ) {
+                    Task {
+                        await appState.signUp()
+                    }
                 }
 
                 DMButton(title: "Already have an account?", style: .text, uppercase: false) {
+                    appState.clearAuthError()
                     appState.push(.logIn)
                 }
             }
+        }
+        .onChange(of: appState.signUpData) { _ in
+            appState.clearAuthError()
+        }
+        .onAppear {
+            appState.clearAuthError()
         }
     }
 }

@@ -24,19 +24,40 @@ struct WelcomeView: View {
                         .foregroundColor(.dmPrimary)
                         .padding(.top, 24)
 
-                    DMButton(title: "Sign Up") {
-                        appState.push(.signUp)
-                    }
+                    if let user = appState.authenticatedUser {
+                        VStack(spacing: 12) {
+                            Text("Signed in as \(user.fullName)")
+                                .font(.subheadline)
+                                .foregroundColor(.dmTextSecondary)
 
-                    Button(action: {
-                        appState.push(.logIn)
-                    }) {
-                        Text("Already have an account?")
+                            DMButton(title: "Continue to Dashboard") {
+                                appState.navigateToHome()
+                            }
+
+                            Button("Not you? Sign out") {
+                                appState.signOut()
+                            }
+                            .buttonStyle(.plain)
                             .font(.subheadline)
-                            .fontWeight(.semibold)
                             .foregroundColor(.dmPrimary)
+                        }
+                    } else {
+                        DMButton(title: "Sign Up") {
+                            appState.clearAuthError()
+                            appState.push(.signUp)
+                        }
+
+                        Button(action: {
+                            appState.clearAuthError()
+                            appState.push(.logIn)
+                        }) {
+                            Text("Already have an account?")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.dmPrimary)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
                 .dmCardBackground()
                 .padding(.horizontal, 32)

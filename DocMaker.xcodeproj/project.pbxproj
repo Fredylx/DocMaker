@@ -40,6 +40,7 @@
 		FD44A5D22EAAC85100096F04 /* DocumentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */; };
 		FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D32EAADE3C00096F04 /* AskAIView.swift */; };
 		FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */; };
+		FD44A5D82EAAE89D00096F04 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D72EAAE89D00096F04 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFComposer.swift; sourceTree = "<group>"; };
 		FD44A5D32EAADE3C00096F04 /* AskAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAIView.swift; sourceTree = "<group>"; };
 		FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
+		FD44A5D72EAAE89D00096F04 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		FDFC1752A829C548E6D636DC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +188,7 @@
 		FD44A5CE2EAAC85100096F04 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FD44A5D72EAAE89D00096F04 /* AuthService.swift */,
 				FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
 				FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
 				FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
@@ -277,6 +280,7 @@
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,
 				B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,
 				0581D33F5756F9CE3B0D4E21 /* Theme.swift in Sources */,
+				FD44A5D82EAAE89D00096F04 /* AuthService.swift in Sources */,
 				427A852ACFC7CB6F234F40E6 /* TrusteeInfoView.swift in Sources */,
 				93DE82B82E6BC8B277097B5A /* WelcomeView.swift in Sources */,
 			);

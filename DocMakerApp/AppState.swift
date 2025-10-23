@@ -29,6 +29,9 @@ final class AppState: ObservableObject {
 
     @Published var signUpData = SignUpData()
     @Published var logInData = LogInData()
+    @Published private(set) var authenticatedUser: AuthUser?
+    @Published var authError: String?
+    @Published var isAuthenticating = false
     @Published var primaryPerson = PersonInfo()
     @Published var spouse = SpouseInfo()
     @Published var children: [ChildInfo] = [ChildInfo(), ChildInfo(), ChildInfo()]
@@ -38,10 +41,13 @@ final class AppState: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private let documentStorage: DocumentStorage
+    private let authService: AuthServicing
 
-    init(documentStorage: DocumentStorage = .shared) {
+    init(documentStorage: DocumentStorage = .shared, authService: AuthServicing = AuthService.shared) {
         self.documentStorage = documentStorage
+        self.authService = authService
         self.generatedDocuments = documentStorage.documents
+        self.authenticatedUser = authService.currentUser
 
         documentStorage.$documents
             .receive(on: DispatchQueue.main)
@@ -49,6 +55,21 @@ final class AppState: ObservableObject {
                 self?.generatedDocuments = documents
             }
             .store(in: &cancellables)
+
+        if authenticatedUser != nil {
+            path.append(AppRoute.home)
+        }
+    }
+
+    var canAttemptSignUp: Bool {
+        !signUpData.email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !signUpData.password.isEmpty &&
+        !signUpData.fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    var canAttemptLogIn: Bool {
+        !logInData.email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !logInData.password.isEmpty
     }
 
     func push(_ route: AppRoute) {
@@ -67,6 +88,61 @@ final class AppState: ObservableObject {
     func navigateToHome() {
         path = NavigationPath()
         path.append(AppRoute.home)
+    }
+
+    func clearAuthError() {
+        authError = nil
+    }
+
+    func signOut() {
+        authService.signOut()
+        authenticatedUser = nil
+        authError = nil
+        isAuthenticating = false
+        signUpData = SignUpData()
+        logInData = LogInData()
+        popToRoot()
+    }
+
+    func signUp() async {
+        guard !isAuthenticating else { return }
+
+        authError = nil
+        isAuthenticating = true
+        let data = signUpData
+
+        do {
+            let user = try await authService.signUp(email: data.email, password: data.password, fullName: data.fullName)
+            authenticatedUser = user
+            signUpData.password = ""
+            signUpData.email = user.email
+            signUpData.fullName = user.fullName
+            logInData = LogInData(email: user.email, password: "")
+            navigateToHome()
+        } catch {
+            authError = error.localizedDescription
+        }
+
+        isAuthenticating = false
+    }
+
+    func logIn() async {
+        guard !isAuthenticating else { return }
+
+        authError = nil
+        isAuthenticating = true
+        let data = logInData
+
+        do {
+            let user = try await authService.logIn(email: data.email, password: data.password)
+            authenticatedUser = user
+            logInData = LogInData(email: user.email, password: "")
+            navigateToHome()
+        } catch {
+            authError = error.localizedDescription
+        }
+
+        isAuthenticating = false
     }
 
     func startTrusteeFlow() {
@@ -108,7 +184,7 @@ final class AppState: ObservableObject {
 
     func resetAfterCompletion() {
         signUpData = SignUpData()
-        logInData = LogInData()
+        logInData = LogInData(email: authenticatedUser?.email ?? "", password: "")
         primaryPerson = PersonInfo()
         spouse = SpouseInfo()
         children = [ChildInfo(), ChildInfo(), ChildInfo()]
@@ -140,13 +216,13 @@ final class AppState: ObservableObject {
     }
 }
 
-struct SignUpData {
+struct SignUpData: Equatable {
     var email: String = ""
     var password: String = ""
     var fullName: String = ""
 }
 
-struct LogInData {
+struct LogInData: Equatable {
     var email: String = ""
     var password: String = ""
 }
