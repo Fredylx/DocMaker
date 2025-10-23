@@ -6,6 +6,7 @@ enum DMButtonStyleType {
     case text
 }
 
+@available(iOS 16.0, *)
 struct DMButton: View {
     let title: String
     var style: DMButtonStyleType = .primary

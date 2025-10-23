@@ -151,12 +151,12 @@ struct AuthStorage {
         self.defaults = defaults
     }
 
-    func loadUsers() -> [AuthRecord] {
+    fileprivate func loadUsers() -> [AuthRecord] {
         guard let data = defaults.data(forKey: usersKey) else { return [] }
         return (try? decoder.decode([AuthRecord].self, from: data)) ?? []
     }
 
-    func saveUsers(_ records: [AuthRecord]) {
+    fileprivate func saveUsers(_ records: [AuthRecord]) {
         guard let data = try? encoder.encode(records) else { return }
         defaults.set(data, forKey: usersKey)
     }
@@ -166,7 +166,7 @@ struct AuthStorage {
         return try? decoder.decode(AuthUser.self, from: data)
     }
 
-    func saveCurrentUser(_ user: AuthUser?) {
+    fileprivate func saveCurrentUser(_ user: AuthUser?) {
         if let user,
            let data = try? encoder.encode(user) {
             defaults.set(data, forKey: currentUserKey)

@@ -57,7 +57,7 @@ final class AppState: ObservableObject {
             .store(in: &cancellables)
 
         if authenticatedUser != nil {
-            path.append(.home)
+            path.append(AppRoute.home)
         }
     }
 
