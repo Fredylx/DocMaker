@@ -36,8 +36,12 @@ struct HomeView: View {
                             appState.push(.faq)
                         }
 
+                        DMActionCard(title: "+ Ask AI") {
+                            appState.push(.askAI)
+                        }
+
                         DMActionCard(title: "+ Explain how it works") {
-                            // Placeholder
+                            appState.push(.howItWorks)
                         }
 
                         DMActionCard(title: "+ Buy") {

@@ -18,6 +18,8 @@ enum AppRoute: Hashable {
     case referFriend
     case contact
     case faq
+    case askAI
+    case howItWorks
 }
 
 @available(iOS 16.0, *)

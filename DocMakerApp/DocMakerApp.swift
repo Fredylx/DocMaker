@@ -51,6 +51,10 @@ private struct RootView: View {
                         ContactUsView()
                     case .faq:
                         FAQView()
+                    case .askAI:
+                        AskAIView()
+                    case .howItWorks:
+                        HowItWorksView()
                     }
                 }
         }
