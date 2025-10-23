@@ -15,6 +15,7 @@ enum AppRoute: Hashable {
     case documentsList
     case documentDetail(id: UUID)
     case payment
+    case paymentSuccess
     case referFriend
     case contact
     case faq
@@ -38,6 +39,7 @@ final class AppState: ObservableObject {
     @Published private(set) var trustees: [TrusteeInfo] = [TrusteeInfo(order: 1)]
     @Published private(set) var generatedDocuments: [DocumentMetadata] = []
     @Published var selectedDocumentID: UUID?
+    @Published var lastPaymentReceipt: StripeTestPaymentReceipt?
 
     private var cancellables = Set<AnyCancellable>()
     private let documentStorage: DocumentStorage
@@ -101,6 +103,12 @@ final class AppState: ObservableObject {
         isAuthenticating = false
         signUpData = SignUpData()
         logInData = LogInData()
+        primaryPerson = PersonInfo()
+        spouse = SpouseInfo()
+        children = [ChildInfo(), ChildInfo(), ChildInfo()]
+        trustees = [TrusteeInfo(order: 1)]
+        selectedDocumentID = nil
+        lastPaymentReceipt = nil
         popToRoot()
     }
 
@@ -190,6 +198,7 @@ final class AppState: ObservableObject {
         children = [ChildInfo(), ChildInfo(), ChildInfo()]
         trustees = [TrusteeInfo(order: 1)]
         selectedDocumentID = nil
+        lastPaymentReceipt = nil
         popToRoot()
     }
 

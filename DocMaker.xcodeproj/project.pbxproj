@@ -30,7 +30,9 @@
 		FD44A5C32EAAC82700096F04 /* ConsentAndGenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */; };
 		FD44A5C42EAAC82700096F04 /* ReferFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BE2EAAC82600096F04 /* ReferFriendView.swift */; };
 		FD44A5C52EAAC82700096F04 /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */; };
-		FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */; };
+                FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */; };
+                FD44A5E42EAAD2AF00096F04 /* StripePaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5E32EAAD2AF00096F04 /* StripePaymentService.swift */; };
+                FD44A5E72EAAD2B200096F04 /* PaymentTestModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5E62EAAD2B200096F04 /* PaymentTestModeView.swift */; };
 		FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B82EAAC82600096F04 /* ContactUsView.swift */; };
 		FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */; };
 		FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BB2EAAC82600096F04 /* FAQView.swift */; };
@@ -69,7 +71,9 @@
 		FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
 		FD44A5BB2EAAC82600096F04 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePDFView.swift; sourceTree = "<group>"; };
-		FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
+                FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
+                FD44A5E32EAAD2AF00096F04 /* StripePaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePaymentService.swift; sourceTree = "<group>"; };
+                FD44A5E62EAAD2B200096F04 /* PaymentTestModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTestModeView.swift; sourceTree = "<group>"; };
 		FD44A5BE2EAAC82600096F04 /* ReferFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferFriendView.swift; sourceTree = "<group>"; };
 		FD44A5BF2EAAC82600096F04 /* ReviewInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfoView.swift; sourceTree = "<group>"; };
 		FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentGenerationService.swift; sourceTree = "<group>"; };
@@ -169,13 +173,14 @@
 			path = DocMakerApp;
 			sourceTree = "<group>";
 		};
-		FD44A5C02EAAC82600096F04 /* Documents */ = {
-			isa = PBXGroup;
-			children = (
-				FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */,
-				FD44A5B82EAAC82600096F04 /* ContactUsView.swift */,
-				FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */,
-				FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */,
+                FD44A5C02EAAC82600096F04 /* Documents */ = {
+                        isa = PBXGroup;
+                        children = (
+                                FD44A5E62EAAD2B200096F04 /* PaymentTestModeView.swift */,
+                                FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */,
+                                FD44A5B82EAAC82600096F04 /* ContactUsView.swift */,
+                                FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */,
+                                FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */,
 				FD44A5BB2EAAC82600096F04 /* FAQView.swift */,
 				FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */,
 				FD44A5BD2EAAC82600096F04 /* PaymentSuccessView.swift */,
@@ -185,13 +190,14 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
-		FD44A5CE2EAAC85100096F04 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				FD44A5D72EAAE89D00096F04 /* AuthService.swift */,
-				FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
-				FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
-				FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
+                FD44A5CE2EAAC85100096F04 /* Services */ = {
+                        isa = PBXGroup;
+                        children = (
+                                FD44A5E32EAAD2AF00096F04 /* StripePaymentService.swift */,
+                                FD44A5D72EAAE89D00096F04 /* AuthService.swift */,
+                                FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
+                                FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
+                                FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
 				FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */,
 			);
 			path = Services;
@@ -270,11 +276,13 @@
 				FD44A5C32EAAC82700096F04 /* ConsentAndGenerateView.swift in Sources */,
 				FD44A5C42EAAC82700096F04 /* ReferFriendView.swift in Sources */,
 				FD44A5C52EAAC82700096F04 /* DocumentListView.swift in Sources */,
-				FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */,
-				FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */,
-				FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */,
-				FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */,
-				FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */,
+                                FD44A5C62EAAC82700096F04 /* PaymentSuccessView.swift in Sources */,
+                                FD44A5E72EAAD2B200096F04 /* PaymentTestModeView.swift in Sources */,
+                                FD44A5C72EAAC82700096F04 /* ContactUsView.swift in Sources */,
+                                FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */,
+                                FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */,
+                                FD44A5E42EAAD2AF00096F04 /* StripePaymentService.swift in Sources */,
+                                FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */,
 				FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */,
 				953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,

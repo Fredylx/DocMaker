@@ -12,7 +12,7 @@ struct HomeView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 28) {
                     DMHeaderBanner(title: "Doc Maker", subtitle: "Launch a new document or pick up where you left off", actionTitle: "+ Buy") {
-                        // Placeholder for purchase flow
+                        appState.push(.payment)
                     }
 
                     VStack(spacing: 16) {
