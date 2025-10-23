@@ -1,0 +1,14 @@
+name: DocMaker
+options:
+  bundleIdPrefix: com.yourcompany
+  deploymentTarget:
+    iOS: 16.0
+targets:
+  DocMaker:
+    type: application
+    platform: iOS
+    sources: [DocMakerApp]
+    settings:
+      base:
+        INFOPLIST_FILE: DocMakerApp/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.docmaker
