@@ -33,6 +33,24 @@ private struct RootView: View {
                         ChildrenInfoView()
                     case .trustee(let index):
                         TrusteeInfoView(index: index)
+                    case .reviewInfo:
+                        ReviewInfoView()
+                    case .legalConsent:
+                        ConsentAndGenerateView()
+                    case .generateDocs:
+                        GeneratePDFView()
+                    case .documentsList:
+                        DocumentListView()
+                    case .documentDetail(let id):
+                        DocumentDetailView(documentID: id)
+                    case .payment:
+                        PaymentSuccessView()
+                    case .referFriend:
+                        ReferFriendView()
+                    case .contact:
+                        ContactUsView()
+                    case .faq:
+                        FAQView()
                     }
                 }
         }
