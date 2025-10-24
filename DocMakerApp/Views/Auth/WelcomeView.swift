@@ -47,6 +47,18 @@ struct WelcomeView: View {
                             appState.push(.signUp)
                         }
 
+                        if let error = appState.authError {
+                            Text(error)
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                        }
+
+                        DMGoogleSignInButton(isLoading: appState.isAuthenticating) { result in
+                            appState.handleGoogleSignIn(result: result)
+                        }
+
                         DMAppleSignInButton(isLoading: appState.isAuthenticating) { result in
                             appState.handleAppleSignIn(result: result)
                         }

@@ -3,6 +3,11 @@ options:
   bundleIdPrefix: com.yourcompany
   deploymentTarget:
     iOS: 16.0
+packages:
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS
+    from: 7.0.0
+
 targets:
     DocMaker:
       type: application
@@ -13,3 +18,8 @@ targets:
         base:
           INFOPLIST_FILE: DocMakerApp/Info.plist
           PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.docmaker
+      dependencies:
+        - package: GoogleSignIn
+          product: GoogleSignIn
+        - package: GoogleSignIn
+          product: GoogleSignInSwift

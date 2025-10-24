@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(GoogleSignIn)
+import GoogleSignIn
+#endif
 
 struct AuthUser: Codable, Identifiable, Equatable {
     let id: UUID
@@ -46,6 +49,19 @@ struct AppleSignInCredentials {
     }
 }
 
+struct GoogleSignInCredentials {
+    let userID: String
+    let email: String?
+    let fullName: String?
+
+    var normalizedFullName: String? {
+        guard let trimmed = fullName?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else {
+            return nil
+        }
+        return trimmed
+    }
+}
+
 protocol AuthServicing {
     var currentUser: AuthUser? { get }
 
@@ -60,6 +76,9 @@ protocol AuthServicing {
 
     @MainActor
     func signInWithApple(_ credentials: AppleSignInCredentials) async throws -> AuthUser
+
+    @MainActor
+    func signInWithGoogle(_ credentials: GoogleSignInCredentials) async throws -> AuthUser
 }
 
 @MainActor
@@ -175,9 +194,65 @@ final class AuthService: AuthServicing {
         return user
     }
 
+    func signInWithGoogle(_ credentials: GoogleSignInCredentials) async throws -> AuthUser {
+        try await Task.sleep(nanoseconds: 300_000_000) // Simulate network latency
+
+        var records = storage.loadUsers()
+
+        if let index = records.firstIndex(where: { $0.googleUserIdentifier == credentials.userID }) {
+            var existingRecord = records[index]
+
+            if let email = credentials.email {
+                existingRecord.email = Self.normalize(email: email)
+            }
+
+            if let name = credentials.normalizedFullName {
+                existingRecord.fullName = name
+            }
+
+            records[index] = existingRecord
+            storage.saveUsers(records)
+
+            let user = existingRecord.authUser
+            currentUser = user
+            storage.saveCurrentUser(user)
+            return user
+        }
+
+        let normalizedEmail: String
+        if let email = credentials.email {
+            normalizedEmail = Self.normalize(email: email)
+        } else {
+            normalizedEmail = Self.normalize(email: "\(credentials.userID)@users.noreply.google.com")
+        }
+
+        let resolvedName = credentials.normalizedFullName ?? "Google User"
+
+        let newRecord = AuthRecord(
+            id: UUID(),
+            email: normalizedEmail,
+            fullName: resolvedName,
+            password: nil,
+            provider: .google,
+            appleUserIdentifier: nil,
+            googleUserIdentifier: credentials.userID
+        )
+
+        records.append(newRecord)
+        storage.saveUsers(records)
+
+        let user = newRecord.authUser
+        currentUser = user
+        storage.saveCurrentUser(user)
+        return user
+    }
+
     func signOut() {
         currentUser = nil
         storage.saveCurrentUser(nil)
+#if canImport(GoogleSignIn)
+        GIDSignIn.sharedInstance.signOut()
+#endif
     }
 
     private func validate(email: String, password: String, fullName: String) throws {
@@ -208,6 +283,7 @@ private struct AuthRecord: Codable {
     enum Provider: String, Codable {
         case emailPassword
         case apple
+        case google
     }
 
     enum CodingKeys: String, CodingKey {
@@ -217,6 +293,7 @@ private struct AuthRecord: Codable {
         case password
         case provider
         case appleUserIdentifier
+        case googleUserIdentifier
     }
 
     let id: UUID
@@ -225,6 +302,7 @@ private struct AuthRecord: Codable {
     var password: String?
     var provider: Provider
     var appleUserIdentifier: String?
+    var googleUserIdentifier: String?
 
     var authUser: AuthUser {
         AuthUser(id: id, email: email, fullName: fullName)
@@ -236,7 +314,8 @@ private struct AuthRecord: Codable {
         fullName: String,
         password: String?,
         provider: Provider,
-        appleUserIdentifier: String? = nil
+        appleUserIdentifier: String? = nil,
+        googleUserIdentifier: String? = nil
     ) {
         self.id = id
         self.email = email
@@ -244,6 +323,7 @@ private struct AuthRecord: Codable {
         self.password = password
         self.provider = provider
         self.appleUserIdentifier = appleUserIdentifier
+        self.googleUserIdentifier = googleUserIdentifier
     }
 
     init(from decoder: Decoder) throws {
@@ -254,6 +334,7 @@ private struct AuthRecord: Codable {
         password = try container.decodeIfPresent(String.self, forKey: .password)
         provider = try container.decodeIfPresent(Provider.self, forKey: .provider) ?? .emailPassword
         appleUserIdentifier = try container.decodeIfPresent(String.self, forKey: .appleUserIdentifier)
+        googleUserIdentifier = try container.decodeIfPresent(String.self, forKey: .googleUserIdentifier)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -264,6 +345,7 @@ private struct AuthRecord: Codable {
         try container.encodeIfPresent(password, forKey: .password)
         try container.encode(provider, forKey: .provider)
         try container.encodeIfPresent(appleUserIdentifier, forKey: .appleUserIdentifier)
+        try container.encodeIfPresent(googleUserIdentifier, forKey: .googleUserIdentifier)
     }
 }
 

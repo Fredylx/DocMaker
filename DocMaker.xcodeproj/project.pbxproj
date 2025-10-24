@@ -15,14 +15,17 @@
 		3ACAA14B751C4D5867F9F341 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EA8D958AB30D6DA5235D88 /* AppState.swift */; };
 		427A852ACFC7CB6F234F40E6 /* TrusteeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1237FE5B7E3D0239F388A6C6 /* TrusteeInfoView.swift */; };
 		7B075939F6953B79D5FEAC75 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA615613AC4E4C6BFE91485 /* LoginView.swift */; };
-		8C5F0DBE03DCB57953F377D1 /* DMAuthContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462BFC126F078EFAE5EC87 /* DMAuthContainer.swift */; };
-		93DE82B82E6BC8B277097B5A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB3273DFC8A8A4AF5B2D23 /* WelcomeView.swift */; };
-		953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB4BA25ADADA542137F8EB /* PrimaryPersonInfoView.swift */; };
-		B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CA6C720455A13DE01E83E6 /* SpouseInfoView.swift */; };
-		BF262E9F1B8316AE22CA8A90 /* ChildrenInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903EE675D2E4DD9A1861A1D6 /* ChildrenInfoView.swift */; };
-		C35DC660730FFE7CB5786BD8 /* DMActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */; };
-		C4C216D632AFF2D9F774F107 /* DMFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */; };
-		C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085C175B1430CFF3F15C5E /* SignUpView.swift */; };
+                8C5F0DBE03DCB57953F377D1 /* DMAuthContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462BFC126F078EFAE5EC87 /* DMAuthContainer.swift */; };
+                93DE82B82E6BC8B277097B5A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB3273DFC8A8A4AF5B2D23 /* WelcomeView.swift */; };
+                953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB4BA25ADADA542137F8EB /* PrimaryPersonInfoView.swift */; };
+                B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CA6C720455A13DE01E83E6 /* SpouseInfoView.swift */; };
+                BF262E9F1B8316AE22CA8A90 /* ChildrenInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903EE675D2E4DD9A1861A1D6 /* ChildrenInfoView.swift */; };
+                FD44A5E12EBF123400096F04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5E02EBF123400096F04 /* AppDelegate.swift */; };
+                FD44A5E32EBF123400096F04 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5E22EBF123400096F04 /* AppConfiguration.swift */; };
+                FD44A5E52EBF123400096F04 /* DMGoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5E42EBF123400096F04 /* DMGoogleSignInButton.swift */; };
+                C35DC660730FFE7CB5786BD8 /* DMActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */; };
+                C4C216D632AFF2D9F774F107 /* DMFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */; };
+                C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085C175B1430CFF3F15C5E /* SignUpView.swift */; };
 		CEDD5F2FADDE89C5F374CFF4 /* DocMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */; };
 		F9D3CC408BE73624CEEE48C8 /* DMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495A5A5B044FEF0187774FD /* DMButton.swift */; };
 		FD44A5C12EAAC82700096F04 /* GeneratePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5BC2EAAC82600096F04 /* GeneratePDFView.swift */; };
@@ -59,13 +62,16 @@
 		739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMFloatingButton.swift; sourceTree = "<group>"; };
 		80AB3273DFC8A8A4AF5B2D23 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		903EE675D2E4DD9A1861A1D6 /* ChildrenInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenInfoView.swift; sourceTree = "<group>"; };
-		98E0127DBBF9DE94411F75B6 /* DMFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMFormField.swift; sourceTree = "<group>"; };
-		9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMActionCard.swift; sourceTree = "<group>"; };
-		A5EA8D958AB30D6DA5235D88 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocMakerApp.swift; sourceTree = "<group>"; };
-		E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA085C175B1430CFF3F15C5E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentAndGenerateView.swift; sourceTree = "<group>"; };
+                98E0127DBBF9DE94411F75B6 /* DMFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMFormField.swift; sourceTree = "<group>"; };
+                9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMActionCard.swift; sourceTree = "<group>"; };
+                A5EA8D958AB30D6DA5235D88 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+                CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocMakerApp.swift; sourceTree = "<group>"; };
+                E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+                EA085C175B1430CFF3F15C5E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+                FD44A5E02EBF123400096F04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+                FD44A5E22EBF123400096F04 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+                FD44A5E42EBF123400096F04 /* DMGoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMGoogleSignInButton.swift; sourceTree = "<group>"; };
+                FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentAndGenerateView.swift; sourceTree = "<group>"; };
 		FD44A5B82EAAC82600096F04 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
 		FD44A5B92EAAC82600096F04 /* DocumentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailView.swift; sourceTree = "<group>"; };
 		FD44A5BA2EAAC82600096F04 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
@@ -136,14 +142,15 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		C3DCEC0687A2757FEF427AE9 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */,
-				FD44A5D92EABF8D700096F04 /* DMAppleSignInButton.swift */,
-				22462BFC126F078EFAE5EC87 /* DMAuthContainer.swift */,
-				1495A5A5B044FEF0187774FD /* DMButton.swift */,
-				739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */,
+                C3DCEC0687A2757FEF427AE9 /* Components */ = {
+                        isa = PBXGroup;
+                        children = (
+                                9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */,
+                                FD44A5E42EBF123400096F04 /* DMGoogleSignInButton.swift */,
+                                FD44A5D92EABF8D700096F04 /* DMAppleSignInButton.swift */,
+                                22462BFC126F078EFAE5EC87 /* DMAuthContainer.swift */,
+                                1495A5A5B044FEF0187774FD /* DMButton.swift */,
+                                739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */,
 				98E0127DBBF9DE94411F75B6 /* DMFormField.swift */,
 				431F50BB4B3C27837D27A414 /* DMFormScreen.swift */,
 				3695652B79A62741D1484B79 /* DMHeaderBanner.swift */,
@@ -164,11 +171,12 @@
                         children = (
                                 A5EA8D958AB30D6DA5235D88 /* AppState.swift */,
                                 CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */,
+                                FD44A5E02EBF123400096F04 /* AppDelegate.swift */,
                                 FD6B7EDE2EB20D4D00F7A1A2 /* DocMaker.entitlements */,
                                 204219CF4245E15ACCA03E60 /* Info.plist */,
-				14737CA2425F7FB55EF6AF94 /* Theme.swift */,
-				FD44A5CE2EAAC85100096F04 /* Services */,
-				C3DCEC0687A2757FEF427AE9 /* Components */,
+                                14737CA2425F7FB55EF6AF94 /* Theme.swift */,
+                                FD44A5CE2EAAC85100096F04 /* Services */,
+                                C3DCEC0687A2757FEF427AE9 /* Components */,
 				41B36AB35DED5A5C7BB20AF6 /* Views */,
 			);
 			path = DocMakerApp;
@@ -190,14 +198,15 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
-		FD44A5CE2EAAC85100096F04 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				FD44A5D72EAAE89D00096F04 /* AuthService.swift */,
-				FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
-				FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
-				FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
-				FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */,
+                FD44A5CE2EAAC85100096F04 /* Services */ = {
+                        isa = PBXGroup;
+                        children = (
+                                FD44A5D72EAAE89D00096F04 /* AuthService.swift */,
+                                FD44A5E22EBF123400096F04 /* AppConfiguration.swift */,
+                                FD44A5CA2EAAC85100096F04 /* DocumentGenerationService.swift */,
+                                FD44A5CB2EAAC85100096F04 /* DocumentStorage.swift */,
+                                FD44A5CC2EAAC85100096F04 /* PDFcoClient.swift */,
+                                FD44A5CD2EAAC85100096F04 /* PDFComposer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -216,8 +225,10 @@
 			dependencies = (
 			);
 			name = DocMaker;
-			packageProductDependencies = (
-			);
+                        packageProductDependencies = (
+                                FD44A5E72EBF123400096F04 /* GoogleSignIn */,
+                                FD44A5E82EBF123400096F04 /* GoogleSignInSwift */,
+                        );
 			productName = DocMaker;
 			productReference = E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */;
 			productType = "com.apple.product-type.application";
@@ -241,8 +252,11 @@
 			);
 			mainGroup = D4CC2C096B08335CC2EA8F31;
 			minimizedProjectReferenceProxies = 1;
-			projectDirPath = "";
-			projectRoot = "";
+                        projectDirPath = "";
+                        projectRoot = "";
+                        packageReferences = (
+                                FD44A5E62EBF123400096F04 /* XCRemoteSwiftPackageReference "GoogleSignIn" */,
+                        );
 			targets = (
 				BA7561836EB10E8A64299D06 /* DocMaker */,
 			);
@@ -253,17 +267,18 @@
 		89DCAE9FEDCD03B5F6005583 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = (
-				3ACAA14B751C4D5867F9F341 /* AppState.swift in Sources */,
-				BF262E9F1B8316AE22CA8A90 /* ChildrenInfoView.swift in Sources */,
-				C35DC660730FFE7CB5786BD8 /* DMActionCard.swift in Sources */,
-				8C5F0DBE03DCB57953F377D1 /* DMAuthContainer.swift in Sources */,
-				F9D3CC408BE73624CEEE48C8 /* DMButton.swift in Sources */,
-				C4C216D632AFF2D9F774F107 /* DMFloatingButton.swift in Sources */,
-				03235F7C74DA9E3FB1EEB811 /* DMFormField.swift in Sources */,
-				19BB398C7E3262C92582FEC3 /* DMFormScreen.swift in Sources */,
-				1CA611AD0ECC299BD12C4986 /* DMHeaderBanner.swift in Sources */,
-				CEDD5F2FADDE89C5F374CFF4 /* DocMakerApp.swift in Sources */,
+                files = (
+                        3ACAA14B751C4D5867F9F341 /* AppState.swift in Sources */,
+                        BF262E9F1B8316AE22CA8A90 /* ChildrenInfoView.swift in Sources */,
+                        C35DC660730FFE7CB5786BD8 /* DMActionCard.swift in Sources */,
+                        8C5F0DBE03DCB57953F377D1 /* DMAuthContainer.swift in Sources */,
+                        F9D3CC408BE73624CEEE48C8 /* DMButton.swift in Sources */,
+                        C4C216D632AFF2D9F774F107 /* DMFloatingButton.swift in Sources */,
+                        03235F7C74DA9E3FB1EEB811 /* DMFormField.swift in Sources */,
+                        19BB398C7E3262C92582FEC3 /* DMFormScreen.swift in Sources */,
+                        1CA611AD0ECC299BD12C4986 /* DMHeaderBanner.swift in Sources */,
+                        FD44A5E12EBF123400096F04 /* AppDelegate.swift in Sources */,
+                        CEDD5F2FADDE89C5F374CFF4 /* DocMakerApp.swift in Sources */,
 				38BE51DF4DB10C0FD3438207 /* HomeView.swift in Sources */,
 				FD44A5CF2EAAC85100096F04 /* DocumentGenerationService.swift in Sources */,
 				FD44A5D02EAAC85100096F04 /* PDFcoClient.swift in Sources */,
@@ -280,12 +295,14 @@
 				FD44A5C82EAAC82700096F04 /* DocumentDetailView.swift in Sources */,
 				FD44A5C92EAAC82700096F04 /* FAQView.swift in Sources */,
 				FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */,
-				FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */,
-				953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
+                        FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */,
+                        FD44A5E32EBF123400096F04 /* AppConfiguration.swift in Sources */,
+                        953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,
-				B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,
-				FD44A5DA2EABF8D700096F04 /* DMAppleSignInButton.swift in Sources */,
-				0581D33F5756F9CE3B0D4E21 /* Theme.swift in Sources */,
+                        B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,
+                        FD44A5DA2EABF8D700096F04 /* DMAppleSignInButton.swift in Sources */,
+                        FD44A5E52EBF123400096F04 /* DMGoogleSignInButton.swift in Sources */,
+                        0581D33F5756F9CE3B0D4E21 /* Theme.swift in Sources */,
 				FD44A5D82EAAE89D00096F04 /* AuthService.swift in Sources */,
 				427A852ACFC7CB6F234F40E6 /* TrusteeInfoView.swift in Sources */,
 				93DE82B82E6BC8B277097B5A /* WelcomeView.swift in Sources */,
@@ -293,6 +310,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+                FD44A5E62EBF123400096F04 /* XCRemoteSwiftPackageReference "GoogleSignIn" */ = {
+                        isa = XCRemoteSwiftPackageReference;
+                        repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+                        requirement = {
+                                kind = upToNextMajorVersion;
+                                minimumVersion = 7.0.0;
+                        };
+                };
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+                FD44A5E72EBF123400096F04 /* GoogleSignIn */ = {
+                        isa = XCSwiftPackageProductDependency;
+                        package = FD44A5E62EBF123400096F04 /* XCRemoteSwiftPackageReference "GoogleSignIn" */;
+                        productName = GoogleSignIn;
+                };
+                FD44A5E82EBF123400096F04 /* GoogleSignInSwift */ = {
+                        isa = XCSwiftPackageProductDependency;
+                        package = FD44A5E62EBF123400096F04 /* XCRemoteSwiftPackageReference "GoogleSignIn" */;
+                        productName = GoogleSignInSwift;
+                };
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		21FCC6E7F2D7B0C63C88204C /* Debug */ = {
