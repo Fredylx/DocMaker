@@ -1,6 +1,8 @@
 import SwiftUI
 import Combine
 import AuthenticationServices
+import GoogleSignIn
+import UIKit
 
 enum AppRoute: Hashable {
     case signUp
@@ -97,6 +99,7 @@ final class AppState: ObservableObject {
     }
 
     func signOut() {
+        GIDSignIn.sharedInstance.signOut()
         authService.signOut()
         authenticatedUser = nil
         authError = nil
@@ -115,12 +118,7 @@ final class AppState: ObservableObject {
 
         do {
             let user = try await authService.signUp(email: data.email, password: data.password, fullName: data.fullName)
-            authenticatedUser = user
-            signUpData.password = ""
-            signUpData.email = user.email
-            signUpData.fullName = user.fullName
-            logInData = LogInData(email: user.email, password: "")
-            navigateToHome()
+            updateAuthenticatedState(with: user)
         } catch {
             authError = error.localizedDescription
         }
@@ -137,9 +135,7 @@ final class AppState: ObservableObject {
 
         do {
             let user = try await authService.logIn(email: data.email, password: data.password)
-            authenticatedUser = user
-            logInData = LogInData(email: user.email, password: "")
-            navigateToHome()
+            updateAuthenticatedState(with: user)
         } catch {
             authError = error.localizedDescription
         }
@@ -175,15 +171,79 @@ final class AppState: ObservableObject {
         do {
             let credentials = AppleSignInCredentials(credential: credential)
             let user = try await authService.signInWithApple(credentials)
-            authenticatedUser = user
-            signUpData.email = user.email
-            signUpData.password = ""
-            signUpData.fullName = user.fullName
-            logInData = LogInData(email: user.email, password: "")
-            navigateToHome()
+            updateAuthenticatedState(with: user)
         } catch {
             authError = error.localizedDescription
         }
+    }
+
+    func startGoogleSignIn() {
+        guard !isAuthenticating else { return }
+
+        guard GoogleSignInConfig.isClientIDConfigured else {
+            authError = AuthError.missingGoogleClientID.errorDescription
+            return
+        }
+
+        guard let presentingViewController = UIApplication.dm_topViewController() else {
+            authError = "Unable to find a view controller to present Google Sign-In."
+            return
+        }
+
+        Task {
+            await completeGoogleSignIn(presenting: presentingViewController)
+        }
+    }
+
+    private func completeGoogleSignIn(presenting viewController: UIViewController) async {
+        guard !isAuthenticating else { return }
+
+        authError = nil
+        isAuthenticating = true
+        defer { isAuthenticating = false }
+
+        do {
+            if GIDSignIn.sharedInstance.configuration == nil {
+                GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: GoogleSignInConfig.clientID)
+            }
+
+            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: viewController)
+
+            guard let userID = result.user.userID else {
+                throw AuthError.missingGoogleProfile
+            }
+
+            guard let profile = result.user.profile, let email = profile.email else {
+                throw AuthError.missingGoogleProfile
+            }
+
+            let nameComponents = [profile.givenName, profile.familyName].compactMap { $0 }
+            let fullName = nameComponents.joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
+
+            let googleProfile = GoogleSignInProfile(
+                userID: userID,
+                email: email,
+                fullName: fullName.isEmpty ? nil : fullName
+            )
+
+            let user = try await authService.signInWithGoogle(googleProfile)
+            updateAuthenticatedState(with: user)
+        } catch {
+            if let authError = error as? AuthError {
+                self.authError = authError.errorDescription ?? authError.localizedDescription
+            } else {
+                self.authError = error.localizedDescription
+            }
+        }
+    }
+
+    private func updateAuthenticatedState(with user: AuthUser) {
+        authenticatedUser = user
+        signUpData.email = user.email
+        signUpData.password = ""
+        signUpData.fullName = user.fullName
+        logInData = LogInData(email: user.email, password: "")
+        navigateToHome()
     }
 
     func startTrusteeFlow() {
