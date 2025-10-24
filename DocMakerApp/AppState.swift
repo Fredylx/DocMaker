@@ -16,6 +16,7 @@ enum AppRoute: Hashable {
     case documentsList
     case documentDetail(id: UUID)
     case payment
+    case paymentSuccess
     case referFriend
     case contact
     case faq

@@ -5,7 +5,7 @@ struct PaymentSuccessView: View {
     @EnvironmentObject private var appState: AppState
 
     var body: some View {
-        DMFormScreen(title: "Payment") {
+        DMFormScreen(title: "Payment Complete") {
             VStack(spacing: 24) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 24)
@@ -18,12 +18,12 @@ struct PaymentSuccessView: View {
                                     .font(.system(size: 64))
                                     .foregroundColor(Color.dmPrimary)
 
-                                Text("Payment has been successfully authorized")
+                                Text("Your test payment for $49 was successfully authorized")
                                     .font(.headline)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.dmTextPrimary)
 
-                                Text("There is one more step left. Finish your purchase on the merchant's website.")
+                                Text("Because this is Stripe's sandbox environment, no real charge was created. Replace the test keys with live credentials when you're ready to go live.")
                                     .font(.footnote)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.dmTextSecondary)
@@ -32,7 +32,8 @@ struct PaymentSuccessView: View {
                         )
                 }
 
-                DMButton(title: "Back to merchant", style: .secondary, uppercase: false) {
+                DMButton(title: "Back to documents", style: .secondary, uppercase: false) {
+                    appState.pop()
                     appState.pop()
                 }
             }
