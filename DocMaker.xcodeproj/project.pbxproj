@@ -41,6 +41,7 @@
 		FD44A5D52EAADE3C00096F04 /* AskAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D32EAADE3C00096F04 /* AskAIView.swift */; };
 		FD44A5D62EAADE3C00096F04 /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */; };
 		FD44A5D82EAAE89D00096F04 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D72EAAE89D00096F04 /* AuthService.swift */; };
+		FD44A5DA2EABF8D700096F04 /* DMAppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD44A5D92EABF8D700096F04 /* DMAppleSignInButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +62,7 @@
 		9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMActionCard.swift; sourceTree = "<group>"; };
 		A5EA8D958AB30D6DA5235D88 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		CEA820662A0B176C94F4BF65 /* DocMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocMakerApp.swift; sourceTree = "<group>"; };
-		E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DocMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C891B0CAF0DEA7134F1C14 /* DocMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085C175B1430CFF3F15C5E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		FD44A5B72EAAC82600096F04 /* ConsentAndGenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentAndGenerateView.swift; sourceTree = "<group>"; };
 		FD44A5B82EAAC82600096F04 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		FD44A5D32EAADE3C00096F04 /* AskAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAIView.swift; sourceTree = "<group>"; };
 		FD44A5D42EAADE3C00096F04 /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
 		FD44A5D72EAAE89D00096F04 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		FD44A5D92EABF8D700096F04 /* DMAppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMAppleSignInButton.swift; sourceTree = "<group>"; };
 		FDFC1752A829C548E6D636DC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				9B00C3101FD9CE01C47B4B88 /* DMActionCard.swift */,
+				FD44A5D92EABF8D700096F04 /* DMAppleSignInButton.swift */,
 				22462BFC126F078EFAE5EC87 /* DMAuthContainer.swift */,
 				1495A5A5B044FEF0187774FD /* DMButton.swift */,
 				739F7F4F614C8CD934A8AC35 /* DMFloatingButton.swift */,
@@ -279,6 +282,7 @@
 				953B31CD56327C8499EFF86B /* PrimaryPersonInfoView.swift in Sources */,
 				C61E0C07B4D2A88C7551E930 /* SignUpView.swift in Sources */,
 				B48853ECB43C80E68BAB452F /* SpouseInfoView.swift in Sources */,
+				FD44A5DA2EABF8D700096F04 /* DMAppleSignInButton.swift in Sources */,
 				0581D33F5756F9CE3B0D4E21 /* Theme.swift in Sources */,
 				FD44A5D82EAAE89D00096F04 /* AuthService.swift in Sources */,
 				427A852ACFC7CB6F234F40E6 /* TrusteeInfoView.swift in Sources */,
@@ -294,6 +298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = JXP778RY3Z;
 				INFOPLIST_FILE = DocMakerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -429,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = JXP778RY3Z;
 				INFOPLIST_FILE = DocMakerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
