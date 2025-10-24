@@ -20,3 +20,13 @@ apikey: <public-anon-key>
 ```
 
 Successful responses include an access token (`access_token`) and refresh token (`refresh_token`) that you can store securely (for example in the keychain) and attach to subsequent API calls.
+
+## Opening the project in Xcode
+
+Open the checked-in `DocMaker.xcodeproj` when working on the app. If you prefer regenerating the project with XcodeGen, run:
+
+```sh
+xcodegen generate
+```
+
+The generated project now includes the `GoogleSignIn` and `GoogleSignInSwift` Swift package products so the `import GoogleSignIn` statements resolve without additional manual setup.
