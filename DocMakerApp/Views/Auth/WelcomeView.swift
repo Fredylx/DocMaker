@@ -47,6 +47,10 @@ struct WelcomeView: View {
                             appState.push(.signUp)
                         }
 
+                        DMAppleSignInButton(isLoading: appState.isAuthenticating) { result in
+                            appState.handleAppleSignIn(result: result)
+                        }
+
                         Button(action: {
                             appState.clearAuthError()
                             appState.push(.logIn)

@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import AuthenticationServices
 
 enum AppRoute: Hashable {
     case signUp
@@ -145,6 +146,45 @@ final class AppState: ObservableObject {
         isAuthenticating = false
     }
 
+    func handleAppleSignIn(result: Result<ASAuthorization, Error>) {
+        guard !isAuthenticating else { return }
+
+        switch result {
+        case .success(let authorization):
+            guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+                authError = AuthError.userNotFound.errorDescription ?? "Unable to authenticate with Apple."
+                return
+            }
+
+            Task {
+                await completeAppleSignIn(with: credential)
+            }
+        case .failure(let error):
+            authError = error.localizedDescription
+        }
+    }
+
+    private func completeAppleSignIn(with credential: ASAuthorizationAppleIDCredential) async {
+        guard !isAuthenticating else { return }
+
+        authError = nil
+        isAuthenticating = true
+        defer { isAuthenticating = false }
+
+        do {
+            let credentials = AppleSignInCredentials(credential: credential)
+            let user = try await authService.signInWithApple(credentials)
+            authenticatedUser = user
+            signUpData.email = user.email
+            signUpData.password = ""
+            signUpData.fullName = user.fullName
+            logInData = LogInData(email: user.email, password: "")
+            navigateToHome()
+        } catch {
+            authError = error.localizedDescription
+        }
+    }
+
     func startTrusteeFlow() {
         if trustees.isEmpty {
             trustees = [TrusteeInfo(order: 1)]
@@ -225,6 +265,17 @@ struct SignUpData: Equatable {
 struct LogInData: Equatable {
     var email: String = ""
     var password: String = ""
+}
+
+@available(iOS 16.0, *)
+extension AppleSignInCredentials {
+    init(credential: ASAuthorizationAppleIDCredential) {
+        self.init(
+            userIdentifier: credential.user,
+            email: credential.email,
+            fullNameComponents: credential.fullName
+        )
+    }
 }
 
 struct PersonInfo {

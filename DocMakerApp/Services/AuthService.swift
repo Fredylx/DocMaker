@@ -32,6 +32,20 @@ enum AuthError: LocalizedError, Equatable {
     }
 }
 
+struct AppleSignInCredentials {
+    let userIdentifier: String
+    let email: String?
+    let fullNameComponents: PersonNameComponents?
+
+    var formattedFullName: String? {
+        guard let fullNameComponents else { return nil }
+        let formatter = PersonNameComponentsFormatter()
+        formatter.style = .medium
+        let name = formatter.string(from: fullNameComponents).trimmingCharacters(in: .whitespacesAndNewlines)
+        return name.isEmpty ? nil : name
+    }
+}
+
 protocol AuthServicing {
     var currentUser: AuthUser? { get }
 
@@ -43,6 +57,9 @@ protocol AuthServicing {
 
     @MainActor
     func signOut()
+
+    @MainActor
+    func signInWithApple(_ credentials: AppleSignInCredentials) async throws -> AuthUser
 }
 
 @MainActor
@@ -70,7 +87,13 @@ final class AuthService: AuthServicing {
             throw AuthError.userAlreadyExists
         }
 
-        let newRecord = AuthRecord(id: UUID(), email: normalizedEmail, fullName: trimmedName, password: password)
+        let newRecord = AuthRecord(
+            id: UUID(),
+            email: normalizedEmail,
+            fullName: trimmedName,
+            password: password,
+            provider: .emailPassword
+        )
         records.append(newRecord)
         storage.saveUsers(records)
 
@@ -86,7 +109,7 @@ final class AuthService: AuthServicing {
         try await Task.sleep(nanoseconds: 300_000_000) // Simulate network latency
 
         let records = storage.loadUsers()
-        guard let record = records.first(where: { $0.email == normalizedEmail }) else {
+        guard let record = records.first(where: { $0.email == normalizedEmail && $0.provider == .emailPassword }) else {
             throw AuthError.userNotFound
         }
 
@@ -95,6 +118,58 @@ final class AuthService: AuthServicing {
         }
 
         let user = record.authUser
+        currentUser = user
+        storage.saveCurrentUser(user)
+        return user
+    }
+
+    func signInWithApple(_ credentials: AppleSignInCredentials) async throws -> AuthUser {
+        try await Task.sleep(nanoseconds: 300_000_000) // Simulate network latency
+
+        var records = storage.loadUsers()
+
+        if let index = records.firstIndex(where: { $0.appleUserIdentifier == credentials.userIdentifier }) {
+            var existingRecord = records[index]
+
+            if let email = credentials.email {
+                existingRecord.email = Self.normalize(email: email)
+            }
+
+            if let name = credentials.formattedFullName {
+                existingRecord.fullName = name
+            }
+
+            records[index] = existingRecord
+            storage.saveUsers(records)
+
+            let user = existingRecord.authUser
+            currentUser = user
+            storage.saveCurrentUser(user)
+            return user
+        }
+
+        let normalizedEmail: String
+        if let email = credentials.email {
+            normalizedEmail = Self.normalize(email: email)
+        } else {
+            normalizedEmail = Self.normalize(email: "\(credentials.userIdentifier)@privaterelay.appleid.com")
+        }
+
+        let resolvedName = credentials.formattedFullName ?? "Apple User"
+
+        let newRecord = AuthRecord(
+            id: UUID(),
+            email: normalizedEmail,
+            fullName: resolvedName,
+            password: nil,
+            provider: .apple,
+            appleUserIdentifier: credentials.userIdentifier
+        )
+
+        records.append(newRecord)
+        storage.saveUsers(records)
+
+        let user = newRecord.authUser
         currentUser = user
         storage.saveCurrentUser(user)
         return user
@@ -130,13 +205,65 @@ final class AuthService: AuthServicing {
 }
 
 private struct AuthRecord: Codable {
+    enum Provider: String, Codable {
+        case emailPassword
+        case apple
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case fullName
+        case password
+        case provider
+        case appleUserIdentifier
+    }
+
     let id: UUID
-    let email: String
-    let fullName: String
-    let password: String
+    var email: String
+    var fullName: String
+    var password: String?
+    var provider: Provider
+    var appleUserIdentifier: String?
 
     var authUser: AuthUser {
         AuthUser(id: id, email: email, fullName: fullName)
+    }
+
+    init(
+        id: UUID,
+        email: String,
+        fullName: String,
+        password: String?,
+        provider: Provider,
+        appleUserIdentifier: String? = nil
+    ) {
+        self.id = id
+        self.email = email
+        self.fullName = fullName
+        self.password = password
+        self.provider = provider
+        self.appleUserIdentifier = appleUserIdentifier
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        email = try container.decode(String.self, forKey: .email)
+        fullName = try container.decode(String.self, forKey: .fullName)
+        password = try container.decodeIfPresent(String.self, forKey: .password)
+        provider = try container.decodeIfPresent(Provider.self, forKey: .provider) ?? .emailPassword
+        appleUserIdentifier = try container.decodeIfPresent(String.self, forKey: .appleUserIdentifier)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(email, forKey: .email)
+        try container.encode(fullName, forKey: .fullName)
+        try container.encodeIfPresent(password, forKey: .password)
+        try container.encode(provider, forKey: .provider)
+        try container.encodeIfPresent(appleUserIdentifier, forKey: .appleUserIdentifier)
     }
 }
 
