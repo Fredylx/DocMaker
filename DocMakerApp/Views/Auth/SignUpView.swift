@@ -42,6 +42,10 @@ struct SignUpView: View {
                     }
                 }
 
+                DMAppleSignInButton(isLoading: appState.isAuthenticating) { result in
+                    appState.handleAppleSignIn(result: result)
+                }
+
                 DMButton(title: "Already have an account?", style: .text, uppercase: false) {
                     appState.clearAuthError()
                     appState.push(.logIn)

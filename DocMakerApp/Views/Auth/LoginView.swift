@@ -36,6 +36,10 @@ struct LoginView: View {
                     }
                 }
 
+                DMAppleSignInButton(isLoading: appState.isAuthenticating) { result in
+                    appState.handleAppleSignIn(result: result)
+                }
+
                 HStack {
                     Button("Forgot password?", action: {})
                         .buttonStyle(.plain)
