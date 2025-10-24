@@ -3,6 +3,8 @@ import SwiftUI
 @available(iOS 16.0, *)
 @main
 struct DocMakerApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+
     var body: some Scene {
         WindowGroup {
             RootView()

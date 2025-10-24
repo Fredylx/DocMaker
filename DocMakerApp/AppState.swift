@@ -165,6 +165,20 @@ final class AppState: ObservableObject {
         }
     }
 
+    func handleGoogleSignIn(result: Result<GoogleSignInCredentials, Error>) {
+        guard !isAuthenticating else { return }
+
+        switch result {
+        case .success(let credentials):
+            authError = nil
+            Task {
+                await completeGoogleSignIn(with: credentials)
+            }
+        case .failure(let error):
+            authError = error.localizedDescription
+        }
+    }
+
     private func completeAppleSignIn(with credential: ASAuthorizationAppleIDCredential) async {
         guard !isAuthenticating else { return }
 
@@ -175,6 +189,26 @@ final class AppState: ObservableObject {
         do {
             let credentials = AppleSignInCredentials(credential: credential)
             let user = try await authService.signInWithApple(credentials)
+            authenticatedUser = user
+            signUpData.email = user.email
+            signUpData.password = ""
+            signUpData.fullName = user.fullName
+            logInData = LogInData(email: user.email, password: "")
+            navigateToHome()
+        } catch {
+            authError = error.localizedDescription
+        }
+    }
+
+    private func completeGoogleSignIn(with credentials: GoogleSignInCredentials) async {
+        guard !isAuthenticating else { return }
+
+        authError = nil
+        isAuthenticating = true
+        defer { isAuthenticating = false }
+
+        do {
+            let user = try await authService.signInWithGoogle(credentials)
             authenticatedUser = user
             signUpData.email = user.email
             signUpData.password = ""
