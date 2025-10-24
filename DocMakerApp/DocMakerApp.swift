@@ -44,6 +44,8 @@ private struct RootView: View {
                     case .documentDetail(let id):
                         DocumentDetailView(documentID: id)
                     case .payment:
+                        PaymentTestModeView()
+                    case .paymentSuccess:
                         PaymentSuccessView()
                     case .referFriend:
                         ReferFriendView()
