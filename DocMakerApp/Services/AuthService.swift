@@ -13,6 +13,8 @@ enum AuthError: LocalizedError, Equatable {
     case userAlreadyExists
     case userNotFound
     case incorrectPassword
+    case missingGoogleClientID
+    case missingGoogleProfile
 
     var errorDescription: String? {
         switch self {
@@ -28,8 +30,18 @@ enum AuthError: LocalizedError, Equatable {
             return "We couldn’t find an account with that email."
         case .incorrectPassword:
             return "The password you entered is incorrect."
+        case .missingGoogleClientID:
+            return "Add your Google Sign-In client ID to GoogleSignInConfig.clientID before trying again."
+        case .missingGoogleProfile:
+            return "We couldn't access your Google account details. Please try a different Google account."
         }
     }
+}
+
+struct GoogleSignInProfile {
+    let userID: String
+    let email: String
+    let fullName: String?
 }
 
 struct AppleSignInCredentials {
@@ -60,6 +72,9 @@ protocol AuthServicing {
 
     @MainActor
     func signInWithApple(_ credentials: AppleSignInCredentials) async throws -> AuthUser
+
+    @MainActor
+    func signInWithGoogle(_ profile: GoogleSignInProfile) async throws -> AuthUser
 }
 
 @MainActor
@@ -175,6 +190,55 @@ final class AuthService: AuthServicing {
         return user
     }
 
+    func signInWithGoogle(_ profile: GoogleSignInProfile) async throws -> AuthUser {
+        try await Task.sleep(nanoseconds: 300_000_000) // Simulate network latency
+
+        var records = storage.loadUsers()
+
+        if let index = records.firstIndex(where: { $0.googleUserIdentifier == profile.userID }) {
+            var existingRecord = records[index]
+
+            let normalizedEmail = Self.normalize(email: profile.email)
+            if existingRecord.email != normalizedEmail {
+                existingRecord.email = normalizedEmail
+            }
+
+            if let name = profile.fullName, !name.isEmpty {
+                existingRecord.fullName = name
+            }
+
+            records[index] = existingRecord
+            storage.saveUsers(records)
+
+            let user = existingRecord.authUser
+            currentUser = user
+            storage.saveCurrentUser(user)
+            return user
+        }
+
+        let normalizedEmail = Self.normalize(email: profile.email)
+        let resolvedName = profile.fullName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let finalName = (resolvedName?.isEmpty ?? true) ? "Google User" : resolvedName!
+
+        let newRecord = AuthRecord(
+            id: UUID(),
+            email: normalizedEmail,
+            fullName: finalName,
+            password: nil,
+            provider: .google,
+            appleUserIdentifier: nil,
+            googleUserIdentifier: profile.userID
+        )
+
+        records.append(newRecord)
+        storage.saveUsers(records)
+
+        let user = newRecord.authUser
+        currentUser = user
+        storage.saveCurrentUser(user)
+        return user
+    }
+
     func signOut() {
         currentUser = nil
         storage.saveCurrentUser(nil)
@@ -208,6 +272,7 @@ private struct AuthRecord: Codable {
     enum Provider: String, Codable {
         case emailPassword
         case apple
+        case google
     }
 
     enum CodingKeys: String, CodingKey {
@@ -217,6 +282,7 @@ private struct AuthRecord: Codable {
         case password
         case provider
         case appleUserIdentifier
+        case googleUserIdentifier
     }
 
     let id: UUID
@@ -225,6 +291,7 @@ private struct AuthRecord: Codable {
     var password: String?
     var provider: Provider
     var appleUserIdentifier: String?
+    var googleUserIdentifier: String?
 
     var authUser: AuthUser {
         AuthUser(id: id, email: email, fullName: fullName)
@@ -236,7 +303,8 @@ private struct AuthRecord: Codable {
         fullName: String,
         password: String?,
         provider: Provider,
-        appleUserIdentifier: String? = nil
+        appleUserIdentifier: String? = nil,
+        googleUserIdentifier: String? = nil
     ) {
         self.id = id
         self.email = email
@@ -244,6 +312,7 @@ private struct AuthRecord: Codable {
         self.password = password
         self.provider = provider
         self.appleUserIdentifier = appleUserIdentifier
+        self.googleUserIdentifier = googleUserIdentifier
     }
 
     init(from decoder: Decoder) throws {
@@ -254,6 +323,7 @@ private struct AuthRecord: Codable {
         password = try container.decodeIfPresent(String.self, forKey: .password)
         provider = try container.decodeIfPresent(Provider.self, forKey: .provider) ?? .emailPassword
         appleUserIdentifier = try container.decodeIfPresent(String.self, forKey: .appleUserIdentifier)
+        googleUserIdentifier = try container.decodeIfPresent(String.self, forKey: .googleUserIdentifier)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -264,6 +334,7 @@ private struct AuthRecord: Codable {
         try container.encodeIfPresent(password, forKey: .password)
         try container.encode(provider, forKey: .provider)
         try container.encodeIfPresent(appleUserIdentifier, forKey: .appleUserIdentifier)
+        try container.encodeIfPresent(googleUserIdentifier, forKey: .googleUserIdentifier)
     }
 }
 

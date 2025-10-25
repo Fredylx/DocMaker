@@ -42,6 +42,10 @@ struct SignUpView: View {
                     }
                 }
 
+                DMGoogleSignInButton(isLoading: appState.isAuthenticating) {
+                    appState.startGoogleSignIn()
+                }
+
                 DMAppleSignInButton(isLoading: appState.isAuthenticating) { result in
                     appState.handleAppleSignIn(result: result)
                 }
