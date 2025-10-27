@@ -6,7 +6,7 @@ struct HomeView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            LinearGradient(colors: [Color.dmBackground, Color.white], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [HomePalette.backgroundTop, HomePalette.backgroundBottom], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
@@ -34,11 +34,11 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Welcome back,")
                             .font(.caption)
-                            .foregroundColor(.dmTextSecondary)
+                            .foregroundColor(HomePalette.textSecondary)
 
                         Text(user.fullName.components(separatedBy: " ").first ?? user.fullName)
                             .font(.headline)
-                            .foregroundColor(.dmTextPrimary)
+                            .foregroundColor(HomePalette.textPrimary)
                     }
                 }
             }
@@ -49,12 +49,16 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .imageScale(.medium)
-                        .foregroundColor(.dmPrimary)
+                        .foregroundColor(.white)
                         .padding(10)
                         .background(
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(Color.white)
-                                .shadow(color: Color.black.opacity(0.05), radius: 6, x: 0, y: 4)
+                                .fill(HomePalette.surfaceElevated)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                        .stroke(HomePalette.border, lineWidth: 1)
+                                )
+                                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 6)
                         )
                 }
                 .buttonStyle(.plain)
@@ -130,7 +134,7 @@ private extension HomeView {
         .background(
             RoundedRectangle(cornerRadius: 32, style: .continuous)
                 .fill(
-                    LinearGradient(colors: [Color.dmPrimary, Color.dmPrimaryDark.opacity(0.95)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    LinearGradient(colors: [Color(red: 0.16, green: 0.35, blue: 0.57), Color(red: 0.05, green: 0.16, blue: 0.32)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 )
                 .overlay(
                     ZStack {
@@ -292,11 +296,11 @@ private extension HomeView {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
                 .font(.title3.weight(.semibold))
-                .foregroundColor(.dmTextPrimary)
+                .foregroundColor(HomePalette.textPrimary)
 
             Text(subtitle)
                 .font(.footnote)
-                .foregroundColor(.dmTextSecondary)
+                .foregroundColor(HomePalette.textSecondary)
         }
     }
 }
@@ -311,8 +315,9 @@ private extension HomeView {
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: icon)
                     .font(.title3.weight(.semibold))
+                    .foregroundColor(.white)
                     .frame(width: 42, height: 42)
-                    .background(Color.white.opacity(0.2))
+                    .background(Color.white.opacity(0.12))
                     .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -322,12 +327,12 @@ private extension HomeView {
 
                     Text(subtitle)
                         .font(.footnote)
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundColor(.white.opacity(0.75))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(16)
-            .background(Color.white.opacity(0.08))
+            .background(Color.white.opacity(0.1))
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         }
     }
@@ -340,22 +345,22 @@ private extension HomeView {
                 VStack(alignment: .leading, spacing: 18) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(action.tint.opacity(0.18))
+                            .fill(action.tint.opacity(0.25))
                             .frame(width: 54, height: 54)
 
                         Image(systemName: action.icon)
                             .font(.title3.weight(.semibold))
-                            .foregroundColor(action.tint)
+                            .foregroundColor(.white)
                     }
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text(action.title)
                             .font(.headline)
-                            .foregroundColor(.dmTextPrimary)
+                            .foregroundColor(HomePalette.textPrimary)
 
                         Text(action.subtitle)
                             .font(.footnote)
-                            .foregroundColor(.dmTextSecondary)
+                            .foregroundColor(HomePalette.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -363,8 +368,12 @@ private extension HomeView {
                 .frame(maxWidth: .infinity, minHeight: 160, alignment: .topLeading)
                 .background(
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .fill(Color.white)
-                        .shadow(color: Color.black.opacity(0.08), radius: 16, x: 0, y: 12)
+                        .fill(HomePalette.surface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                                .stroke(HomePalette.border, lineWidth: 1)
+                        )
+                        .shadow(color: Color.black.opacity(0.25), radius: 20, x: 0, y: 12)
                 )
             }
             .buttonStyle(.plain)
@@ -379,36 +388,36 @@ private extension HomeView {
                 HStack(alignment: .center, spacing: 16) {
                     Image(systemName: item.icon)
                         .font(.title3.weight(.semibold))
-                        .foregroundColor(.dmPrimary)
+                        .foregroundColor(.white)
                         .frame(width: 44, height: 44)
-                        .background(Color.dmPrimary.opacity(0.12))
+                        .background(Color.white.opacity(0.12))
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text(item.title)
                             .font(.subheadline.weight(.semibold))
-                            .foregroundColor(.dmTextPrimary)
+                            .foregroundColor(HomePalette.textPrimary)
 
                         Text(item.subtitle)
                             .font(.footnote)
-                            .foregroundColor(.dmTextSecondary)
+                            .foregroundColor(HomePalette.textSecondary)
                     }
 
                     Spacer()
 
                     Image(systemName: "chevron.right")
                         .font(.footnote.weight(.semibold))
-                        .foregroundColor(.dmBorder)
+                        .foregroundColor(HomePalette.textSecondary)
                 }
                 .padding(20)
                 .background(
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
-                        .fill(Color.white)
+                        .fill(HomePalette.surface)
                         .overlay(
                             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                .stroke(Color.dmBorder.opacity(0.35), lineWidth: 1)
+                                .stroke(HomePalette.border, lineWidth: 1)
                         )
-                        .shadow(color: Color.black.opacity(0.04), radius: 10, x: 0, y: 8)
+                        .shadow(color: Color.black.opacity(0.2), radius: 18, x: 0, y: 10)
                 )
             }
             .buttonStyle(.plain)
@@ -432,5 +441,17 @@ private extension HomeView {
         let perform: () -> Void
 
         var id: String { title }
+    }
+}
+
+private extension HomeView {
+    enum HomePalette {
+        static let backgroundTop = Color(red: 0.06, green: 0.08, blue: 0.14)
+        static let backgroundBottom = Color(red: 0.01, green: 0.02, blue: 0.05)
+        static let surface = Color(red: 0.12, green: 0.16, blue: 0.23)
+        static let surfaceElevated = Color(red: 0.17, green: 0.22, blue: 0.30)
+        static let textPrimary = Color.white
+        static let textSecondary = Color.white.opacity(0.6)
+        static let border = Color.white.opacity(0.12)
     }
 }
