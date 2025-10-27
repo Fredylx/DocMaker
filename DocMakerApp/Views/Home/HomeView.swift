@@ -6,7 +6,7 @@ struct HomeView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            LinearGradient(colors: [HomePalette.backgroundTop, HomePalette.backgroundBottom], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [HomePalette.backgroundTop, HomePalette.backgroundBottom], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
@@ -49,16 +49,12 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .imageScale(.medium)
-                        .foregroundColor(.white)
+                        .foregroundColor(HomePalette.accent)
                         .padding(10)
                         .background(
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(HomePalette.surfaceElevated)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                        .stroke(HomePalette.border, lineWidth: 1)
-                                )
-                                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 6)
+                                .fill(Color.white)
+                                .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 6)
                         )
                 }
                 .buttonStyle(.plain)
@@ -75,11 +71,16 @@ private extension HomeView {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(greeting)
                         .font(.title3.weight(.semibold))
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(HomePalette.textPrimary)
 
                     Text("Let’s complete your estate plan with confidence.")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundColor(HomePalette.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("Pick up where you left off or explore new guidance tailored for you.")
+                        .font(.subheadline)
+                        .foregroundColor(HomePalette.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -87,70 +88,63 @@ private extension HomeView {
 
                 Image(systemName: "shield.checkerboard")
                     .font(.system(size: 34, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.7))
+                    .foregroundColor(HomePalette.accent)
                     .padding(12)
                     .background(
                         RoundedRectangle(cornerRadius: 18, style: .continuous)
-                            .fill(Color.white.opacity(0.15))
+                            .fill(HomePalette.badgeBackground)
                     )
             }
 
-            HStack(spacing: 16) {
-                HeroStatView(icon: "doc.text", title: "\(appState.generatedDocuments.count)", subtitle: "Documents ready")
-
-                HeroStatView(icon: "checkmark.circle", title: "\(completionPercentage)%", subtitle: "Profile complete")
+            Button {
+                appState.push(.documentsList)
+            } label: {
+                Label("Go to my documents", systemImage: "doc.text")
+                    .font(.subheadline.weight(.semibold))
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background(Color.white)
+                    .foregroundColor(HomePalette.accent)
+                    .cornerRadius(18)
+                    .shadow(color: HomePalette.cardShadow, radius: 12, x: 0, y: 6)
             }
+            .buttonStyle(.plain)
 
-            HStack(spacing: 12) {
-                Button {
-                    appState.push(.primaryPerson)
-                } label: {
-                    Label("Start new document", systemImage: "sparkles")
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 20)
-                        .background(Color.white)
-                        .foregroundColor(Color.dmPrimary)
-                        .cornerRadius(18)
-                }
-                .buttonStyle(.plain)
-
-                Button {
-                    appState.push(.payment)
-                } label: {
-                    Label("View plans", systemImage: "crown")
-                        .font(.footnote.weight(.semibold))
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 18)
-                        .background(Color.white.opacity(0.18))
-                        .foregroundColor(.white)
-                        .cornerRadius(16)
-                }
-                .buttonStyle(.plain)
+            Button {
+                appState.push(.payment)
+            } label: {
+                Label("Explore plans", systemImage: "crown")
+                    .font(.footnote.weight(.semibold))
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 18)
+                    .background(HomePalette.accent.opacity(0.1))
+                    .foregroundColor(HomePalette.accent)
+                    .cornerRadius(16)
             }
+            .buttonStyle(.plain)
         }
         .padding(26)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 32, style: .continuous)
                 .fill(
-                    LinearGradient(colors: [Color(red: 0.16, green: 0.35, blue: 0.57), Color(red: 0.05, green: 0.16, blue: 0.32)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    LinearGradient(colors: [HomePalette.heroTop, HomePalette.heroBottom], startPoint: .topLeading, endPoint: .bottomTrailing)
                 )
                 .overlay(
                     ZStack {
                         Circle()
-                            .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                            .stroke(HomePalette.heroHighlight.opacity(0.4), lineWidth: 1)
                             .frame(width: 200, height: 200)
                             .offset(x: 120, y: -100)
 
                         Circle()
-                            .fill(Color.white.opacity(0.08))
+                            .fill(HomePalette.heroHighlight.opacity(0.25))
                             .frame(width: 140, height: 140)
                             .offset(x: -140, y: 80)
                     }
                 )
         )
-        .shadow(color: Color.dmPrimary.opacity(0.22), radius: 22, x: 0, y: 16)
+        .shadow(color: HomePalette.heroShadow, radius: 22, x: 0, y: 16)
     }
 
     var quickActionsSection: some View {
@@ -274,24 +268,6 @@ private extension HomeView {
         return "Welcome to Doc Maker"
     }
 
-    var completionPercentage: Int {
-        let total = Double(profileCompletionStates.count)
-        guard total > 0 else { return 0 }
-
-        let completed = Double(profileCompletionStates.filter { $0 }.count)
-        return Int((completed / total * 100).rounded())
-    }
-
-    var profileCompletionStates: [Bool] {
-        [
-            !appState.primaryPerson.fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-            !(appState.spouse.fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-              appState.spouse.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty),
-            appState.children.contains { !$0.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty },
-            appState.trustees.contains { !$0.fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-        ]
-    }
-
     func sectionHeader(title: String, subtitle: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
@@ -306,37 +282,6 @@ private extension HomeView {
 }
 
 private extension HomeView {
-    struct HeroStatView: View {
-        let icon: String
-        let title: String
-        let subtitle: String
-
-        var body: some View {
-            HStack(alignment: .center, spacing: 12) {
-                Image(systemName: icon)
-                    .font(.title3.weight(.semibold))
-                    .foregroundColor(.white)
-                    .frame(width: 42, height: 42)
-                    .background(Color.white.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.title3.weight(.bold))
-                        .foregroundColor(.white)
-
-                    Text(subtitle)
-                        .font(.footnote)
-                        .foregroundColor(.white.opacity(0.75))
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(16)
-            .background(Color.white.opacity(0.1))
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        }
-    }
-
     struct HomeActionCard: View {
         let action: HomeAction
 
@@ -345,12 +290,12 @@ private extension HomeView {
                 VStack(alignment: .leading, spacing: 18) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(action.tint.opacity(0.25))
+                            .fill(action.tint.opacity(0.15))
                             .frame(width: 54, height: 54)
 
                         Image(systemName: action.icon)
                             .font(.title3.weight(.semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(action.tint)
                     }
 
                     VStack(alignment: .leading, spacing: 6) {
@@ -368,12 +313,8 @@ private extension HomeView {
                 .frame(maxWidth: .infinity, minHeight: 160, alignment: .topLeading)
                 .background(
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .fill(HomePalette.surface)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                                .stroke(HomePalette.border, lineWidth: 1)
-                        )
-                        .shadow(color: Color.black.opacity(0.25), radius: 20, x: 0, y: 12)
+                        .fill(Color.white)
+                        .shadow(color: HomePalette.cardShadow, radius: 18, x: 0, y: 12)
                 )
             }
             .buttonStyle(.plain)
@@ -388,9 +329,9 @@ private extension HomeView {
                 HStack(alignment: .center, spacing: 16) {
                     Image(systemName: item.icon)
                         .font(.title3.weight(.semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(HomePalette.accent)
                         .frame(width: 44, height: 44)
-                        .background(Color.white.opacity(0.12))
+                        .background(HomePalette.badgeBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
 
                     VStack(alignment: .leading, spacing: 6) {
@@ -412,12 +353,8 @@ private extension HomeView {
                 .padding(20)
                 .background(
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
-                        .fill(HomePalette.surface)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                .stroke(HomePalette.border, lineWidth: 1)
-                        )
-                        .shadow(color: Color.black.opacity(0.2), radius: 18, x: 0, y: 10)
+                        .fill(Color.white)
+                        .shadow(color: HomePalette.cardShadow, radius: 16, x: 0, y: 10)
                 )
             }
             .buttonStyle(.plain)
@@ -446,12 +383,16 @@ private extension HomeView {
 
 private extension HomeView {
     enum HomePalette {
-        static let backgroundTop = Color(red: 0.06, green: 0.08, blue: 0.14)
-        static let backgroundBottom = Color(red: 0.01, green: 0.02, blue: 0.05)
-        static let surface = Color(red: 0.12, green: 0.16, blue: 0.23)
-        static let surfaceElevated = Color(red: 0.17, green: 0.22, blue: 0.30)
-        static let textPrimary = Color.white
-        static let textSecondary = Color.white.opacity(0.6)
-        static let border = Color.white.opacity(0.12)
+        static let backgroundTop = Color(red: 0.96, green: 0.98, blue: 1.0)
+        static let backgroundBottom = Color.white
+        static let heroTop = Color(red: 0.86, green: 0.92, blue: 1.0)
+        static let heroBottom = Color(red: 0.69, green: 0.83, blue: 1.0)
+        static let heroHighlight = Color.white
+        static let heroShadow = Color(red: 0.55, green: 0.68, blue: 0.96).opacity(0.25)
+        static let badgeBackground = Color.white.opacity(0.7)
+        static let cardShadow = Color.black.opacity(0.08)
+        static let textPrimary = Color.dmTextPrimary
+        static let textSecondary = Color.dmTextSecondary
+        static let accent = Color.dmPrimary
     }
 }
